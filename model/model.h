@@ -10,26 +10,31 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#define VERTEX_SIZE 5
+#define VERTEX_SIZE 33
 #define POLYGON_SIZE 6
 #define SURFACE_SIZE 50
 #define MEMORY_ERROR -2
+#define ALL_GOOD -1
 
-
+#include <OpenGL/gl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
 typedef struct {
-    double** data;
+    GLfloat* data;
     size_t size;
-    int pos;
+    GLint pos;
+    GLfloat min_max_x[2];
+    GLfloat min_max_y[2];
+    GLfloat min_max_z[2];
+    GLfloat max_coord;
 } Vertex;
 
 typedef struct {
-    int* data;
+    GLuint * data;
     size_t size;
-    int pos;
+    GLint pos;
 } Polygon;
 
 typedef struct {
@@ -38,25 +43,47 @@ typedef struct {
     int pos;
 } Surface;
 
-typedef struct {
-    Vertex v;
-    Surface s;
-    double min_max_x[2];
-    double min_max_y[2];
-    double min_max_z[2];
-} Model;
+int SurfaceInit(Surface* s);
+int SurfaceResize(Surface* s);
 
 int VertexInit (Vertex* v);
 int VertexResize(Vertex* v);
 int PolygonInit(Polygon* p);
 int PolygonResize(Polygon* p);
-int SurfaceInit(Surface* s);
-int SurfaceResize(Surface* s);
-int ModelInit(Model* m);
 void VertexPrint(Vertex v);
 void SurfacePrint(Surface s);
-void ModelPrint(Model m);
-void FreeModel(Model* m);
+void FreeVertex (Vertex* v);
+void FreeSurface(Surface* s);
+
+//typedef struct {
+//    double** data;
+//    size_t size;
+//    int pos;
+//} Vertex;
+//
+//typedef struct {
+//    int* data;
+//    size_t size;
+//    int pos;
+//} Polygon;
+//
+
+//
+//typedef struct {
+//    Vertex v;
+//    Surface s;
+//    double min_max_x[2];
+//    double min_max_y[2];
+//    double min_max_z[2];
+//} Model;
+//
+
+
+//int ModelInit(Model* m);
+//void VertexPrint(Vertex v);
+//void SurfacePrint(Surface s);
+//void ModelPrint(Model m);
+//void FreeModel(Model* m);
 
 #ifdef __cplusplus
 }

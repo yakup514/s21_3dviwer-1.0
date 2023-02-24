@@ -45,9 +45,14 @@ int main() {
 //        }
 //        
 //    }
-    Model m;
-    ModelSet("/Users/a1234/Desktop/21/c/3dviewer/test.obj", &m, 0.5);
-    ModelPrint(m);
+    Vertex v;
+    Surface s;
+    int err = Parse("/Users/a1234/Desktop/21/c/s21_3dviwer-1.0/model/skull.obj", &v, &s);
+    printf("err = %d\n", err);
+    VertexPrint(v);
+    SurfacePrint(s);
+    FreeVertex(&v);
+    FreeSurface(&s);
     return 0;
 }
 
